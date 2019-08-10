@@ -1,28 +1,63 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Title title="Todos"/>
+    <InputField v-on:add-todo="addTodo"/>
+    <TodosList v-bind:todos="todosList" v-on:del-todo="delTodo"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './components/layout/Title';
+import InputField from './components/InputField';
+import TodosList from './components/TodosList';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Title,
+    InputField,
+    TodosList
+  },
+  data() {
+    return {
+      todosList: [
+        {
+          id: 0,
+          name: 'Teste 1',
+          completed: false
+        },
+        {
+          id: 1,
+          name: 'Teste 2',
+          completed: true
+        },
+        {
+          id: 3,
+          name: 'Teste 3',
+          completed: false
+        }
+      ]
+    }
+  },
+  methods: {
+    addTodo (todo) {
+      this.todosList.push(todo);
+    },
+    delTodo (id) {
+      this.todosList = this.todosList.filter( todo => todo.id !== id);
+    }
   }
 }
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
