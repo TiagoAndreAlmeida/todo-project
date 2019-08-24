@@ -2,6 +2,8 @@
   <div id="app">
     <Title title="Todos"/>
     <InputField v-on:add-todo="addTodo"/>
+    <!-- <div>{{todoList}}</div> -->
+    <!-- <TodosList todos="todoList" v-on:del-todo="delTodo"/> -->
     <TodosList v-bind:todos="todosList" v-on:del-todo="delTodo"/>
   </div>
 </template>
@@ -18,25 +20,9 @@ export default {
     InputField,
     TodosList
   },
-  data() {
-    return {
-      todosList: [
-        {
-          id: 0,
-          name: 'Teste 1',
-          completed: false
-        },
-        {
-          id: 1,
-          name: 'Teste 2',
-          completed: true
-        },
-        {
-          id: 3,
-          name: 'Teste 3',
-          completed: false
-        }
-      ]
+  computed : {
+    todosList(){
+      return this.$store.getters.TODOS
     }
   },
   methods: {

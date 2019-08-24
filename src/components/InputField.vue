@@ -18,8 +18,11 @@ export default {
                 completed: false
 
             }
-            this.$emit('add-todo', newTodo),
-            this.title = ''
+            this.$store.commit("ADD_TODO", newTodo);
+
+            // this.$store.dispatch("ADD_TODO", newTodo);
+            // this.$emit('add-todo', newTodo),
+            // this.title = ''
         }
     }
 }
